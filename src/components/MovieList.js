@@ -1,12 +1,16 @@
 import { useGetPopularMoviesQuery } from '../services/tmdb';
-import { Movie } from './';
+import { Movie, Error, Loading } from './';
 
 const MovieList = () => {
   const { data, error, isLoading } = useGetPopularMoviesQuery();
 
+  if (error) <Error />;
+  if (isLoading) <Loading />;
+
   return (
     <div>
-      <h1>what</h1>
+      {data &&
+        data.results.map(movie => <Movie key={movie.id} movie={movie} />)}
     </div>
   );
 };
