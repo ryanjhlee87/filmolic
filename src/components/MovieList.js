@@ -8,7 +8,7 @@ const MovieList = () => {
   if (isLoading) <Loading />;
 
   return (
-    <div>
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-8 w-full">
       {data &&
         data.results.map(movie => <Movie key={movie.id} movie={movie} />)}
     </div>

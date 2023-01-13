@@ -4,9 +4,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 const App = () => {
   return (
     <Router>
-      <div className="px-20">
+      <div className="sm:px-16 md:px-24 lg:px-48 xl:px-56">
         <Navbar />
-        <div className="px-10">
+        <div className="px-5">
           <Routes>
             <Route exact path="/" element={<MovieList />} />
             <Route exact path={'*'} element={<NotFound />} />
