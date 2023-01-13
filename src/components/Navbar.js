@@ -1,7 +1,18 @@
-import { BsSunFill, BsPersonFill } from 'react-icons/bs';
+import { BsSunFill, BsPersonFill, BsMoonFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { toggleTheme } from '../features/theme/themeSlice';
+import { themeChange } from 'theme-change';
+import { useEffect } from 'react';
 
 const Navbar = () => {
+  const theme = useSelector(state => state.theme.isDarkmode);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    themeChange(theme);
+  }, []);
+
   return (
     <div className="navbar bg-base-100">
       {/* Left Side of Navbar */}
@@ -53,8 +64,13 @@ const Navbar = () => {
 
       {/* Right Side of Navbar */}
       <div className="navbar-end">
-        <button className="btn btn-ghost btn-circle">
-          <BsSunFill />
+        <button
+          onClick={() => dispatch(toggleTheme())}
+          data-set-theme={theme ? 'dark' : 'cupcake'}
+          data-act-class="ACTIVECLASS"
+          className="btn btn-ghost btn-circle"
+        >
+          {theme ? <BsSunFill /> : <BsMoonFill />}
         </button>
         <button className="btn btn-ghost btn-circle">
           <BsPersonFill />
