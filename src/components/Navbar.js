@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { toggleTheme } from '../features/theme/themeSlice';
 import { themeChange } from 'theme-change';
 import { useEffect } from 'react';
+import CategoryGenre from './CategoryGenre';
 
 const Navbar = () => {
   const theme = useSelector(state => state.theme.isDarkmode);
@@ -14,8 +15,8 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className="navbar bg-base-100">
-      {/* Left Side of Navbar */}
+    <div className="navbar bg-base-300 sm:px-16 md:px-24 lg:px-48 xl:px-56 py-8 w-full">
+      {/* Dropdown menu icon */}
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost btn-circle">
@@ -34,20 +35,9 @@ const Navbar = () => {
               />
             </svg>
           </label>
-          <ul
-            tabIndex={0}
-            className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-          >
-            <li>
-              <Link to="/">Homepage</Link>
-            </li>
-            <li>
-              <Link to="/">Portfolio</Link>
-            </li>
-            <li>
-              <Link to="/">About</Link>
-            </li>
-          </ul>
+
+          {/* Dropdown items */}
+          <CategoryGenre />
         </div>
       </div>
 
@@ -55,7 +45,7 @@ const Navbar = () => {
       <div className="navbar-center">
         <Link
           to="/"
-          className="btn btn-ghost normal-case text-3xl"
+          className="btn btn-ghost normal-case text-2xl sm:text-2xl lg:text-3xl xl:text-4xl"
           style={{ fontFamily: 'Dancing Script' }}
         >
           Filmolic
