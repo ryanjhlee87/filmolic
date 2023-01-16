@@ -9,6 +9,7 @@ const CategoryGenre = () => {
   const categoryOrGenreName = useSelector(
     state => state.tmdb.categoryOrGenreName
   );
+  const searchTerm = useSelector(state => state.tmdb.searchTerm);
 
   const dispatch = useDispatch();
 
@@ -30,7 +31,9 @@ const CategoryGenre = () => {
               <Link
                 to="/"
                 className={
-                  categoryOrGenreName === category.value ? 'active' : null
+                  !searchTerm && categoryOrGenreName === category.value
+                    ? 'active'
+                    : null
                 }
                 onClick={() => dispatch(selectCategoryOrGenre(category.value))}
               >
@@ -48,7 +51,11 @@ const CategoryGenre = () => {
             <li key={genre.id}>
               <Link
                 to="/"
-                className={categoryOrGenreName === genre.id ? 'active' : null}
+                className={
+                  !searchTerm && categoryOrGenreName === genre.id
+                    ? 'active'
+                    : null
+                }
                 onClick={() => dispatch(selectCategoryOrGenre(genre.id))}
               >
                 {genre.icon}
