@@ -11,6 +11,7 @@ const Search = () => {
     e.preventDefault();
 
     dispatch(searchMovie(query));
+    setQuery('');
   };
 
   return (

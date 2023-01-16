@@ -1,6 +1,10 @@
-import React from 'react';
-
 const Movie = ({ movie: { title, poster_path } }) => {
+  // Some of the images not available from tmdb website
+  if (poster_path === null) {
+    return null;
+  }
+
+  // Rendering all the movies with poster
   return (
     <div className="card h-full bg-base-100 hover:scale-105 cursor-pointer transition-transform">
       <figure>

@@ -18,10 +18,12 @@ const CategoryGenre = () => {
         tabIndex={0}
         className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
       >
+        {/* Search a list of movies by search term */}
         <Search />
 
         <hr className="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700" />
 
+        {/* Categories */}
         {categories &&
           categories.map(category => (
             <li key={category.id}>
@@ -32,6 +34,7 @@ const CategoryGenre = () => {
                 }
                 onClick={() => dispatch(selectCategoryOrGenre(category.value))}
               >
+                {category.icon}
                 {category.name}
               </Link>
             </li>
@@ -39,6 +42,7 @@ const CategoryGenre = () => {
 
         <hr className="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700" />
 
+        {/* Genres */}
         {genres &&
           genres.map(genre => (
             <li key={genre.id}>
@@ -47,6 +51,7 @@ const CategoryGenre = () => {
                 className={categoryOrGenreName === genre.id ? 'active' : null}
                 onClick={() => dispatch(selectCategoryOrGenre(genre.id))}
               >
+                {genre.icon}
                 {genre.name}
               </Link>
             </li>

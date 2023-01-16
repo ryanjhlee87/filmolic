@@ -1,4 +1,8 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import {
+  configureStore,
+  getDefaultMiddleware,
+  miniSerializeError,
+} from '@reduxjs/toolkit';
 import themeRedcuer from '../features/theme/themeSlice';
 import tmdbReducer from '../features/tmdb/tmdbSlice';
 import { tmdbApi } from '../services/tmdb';
@@ -11,5 +15,7 @@ export const store = configureStore({
   },
 
   middleware: getDefaultMiddleware =>
-    getDefaultMiddleware().concat(tmdbApi.middleware),
+    getDefaultMiddleware({ serializableCheck: false }).concat(
+      tmdbApi.middleware
+    ),
 });
