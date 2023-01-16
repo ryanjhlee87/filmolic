@@ -8,16 +8,20 @@ export const tmdbApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: builder => ({
     getMovies: builder.query({
-      query: categoryOrGenreName => {
+      query: ({ categoryOrGenreName, searchTerm, page }) => {
+        if (searchTerm) {
+          return `/search/movie?query=${searchTerm}&page=${page}&api_key=${apiKey}`;
+        }
+
         if (categoryOrGenreName && typeof categoryOrGenreName === 'string') {
-          return `/movie/${categoryOrGenreName}?api_key=${apiKey}&page=1`;
+          return `/movie/${categoryOrGenreName}?api_key=${apiKey}&page=${page}`;
         }
 
         if (categoryOrGenreName && typeof categoryOrGenreName === 'number') {
-          return `/discover/movie?api_key=${apiKey}&with_genres=${categoryOrGenreName}&page=1`;
+          return `/discover/movie?api_key=${apiKey}&with_genres=${categoryOrGenreName}&page=${page}`;
         }
 
-        return `/movie/popular?api_key=${apiKey}&page=1`;
+        return `/movie/popular?api_key=${apiKey}&page=${page}`;
       },
     }),
   }),

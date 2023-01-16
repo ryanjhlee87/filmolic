@@ -1,16 +1,29 @@
-import React from 'react';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { searchMovie } from '../features/tmdb/tmdbSlice';
 
 // Search input in dropdown menu -> CategoryGenre.js
 const Search = () => {
+  const [query, setQuery] = useState('');
+  const dispatch = useDispatch();
+
+  const querySubmit = e => {
+    e.preventDefault();
+
+    dispatch(searchMovie(query));
+  };
+
   return (
-    <form className="form-control py-2" onSubmit={e => e.preventDefault()}>
+    <form className="form-control py-2" onSubmit={querySubmit}>
       <div className="input-group input-group-sm">
         <input
           type="text"
           placeholder="Search…"
-          className="input input-bordered w-36"
+          value={query}
+          onChange={e => setQuery(e.target.value)}
+          className="input input-bordered w-36 focus:ring-0"
         />
-        <button className="btn btn-square">
+        <button type="submit" className="btn btn-square">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"

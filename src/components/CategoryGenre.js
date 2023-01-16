@@ -6,6 +6,9 @@ import { selectCategoryOrGenre } from '../features/tmdb/tmdbSlice';
 const CategoryGenre = () => {
   const categories = useSelector(state => state.tmdb.categories);
   const genres = useSelector(state => state.tmdb.genres);
+  const categoryOrGenreName = useSelector(
+    state => state.tmdb.categoryOrGenreName
+  );
 
   const dispatch = useDispatch();
 
@@ -21,11 +24,16 @@ const CategoryGenre = () => {
 
         {categories &&
           categories.map(category => (
-            <li
-              key={category.id}
-              onClick={() => dispatch(selectCategoryOrGenre(category.value))}
-            >
-              <Link to="/">{category.name}</Link>
+            <li key={category.id}>
+              <Link
+                to="/"
+                className={
+                  categoryOrGenreName === category.value ? 'active' : null
+                }
+                onClick={() => dispatch(selectCategoryOrGenre(category.value))}
+              >
+                {category.name}
+              </Link>
             </li>
           ))}
 
@@ -36,6 +44,7 @@ const CategoryGenre = () => {
             <li key={genre.id}>
               <Link
                 to="/"
+                className={categoryOrGenreName === genre.id ? 'active' : null}
                 onClick={() => dispatch(selectCategoryOrGenre(genre.id))}
               >
                 {genre.name}

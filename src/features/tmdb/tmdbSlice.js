@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  categoryOrGenreName: '',
+  categoryOrGenreName: 'popular',
+  searchTerm: '',
+  page: 1,
 
   categories: [
     { id: 1, name: 'Popular', value: 'popular' },
@@ -38,9 +40,14 @@ export const tmdbSlice = createSlice({
   reducers: {
     selectCategoryOrGenre: (state, action) => {
       state.categoryOrGenreName = action.payload;
+      state.searchTerm = '';
+    },
+
+    searchMovie: (state, action) => {
+      state.searchTerm = action.payload;
     },
   },
 });
 
-export const { getCategoryAndGenre, selectCategoryOrGenre } = tmdbSlice.actions;
+export const { selectCategoryOrGenre, searchMovie } = tmdbSlice.actions;
 export default tmdbSlice.reducer;
