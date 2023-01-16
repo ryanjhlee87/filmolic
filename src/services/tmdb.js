@@ -7,10 +7,20 @@ export const tmdbApi = createApi({
   reducerPath: 'tmdbApi',
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: builder => ({
-    getPopularMovies: builder.query({
-      query: () => `/movie/popular?api_key=${apiKey}&page=1`,
+    getMovies: builder.query({
+      query: categoryOrGenreName => {
+        if (categoryOrGenreName && typeof categoryOrGenreName === 'string') {
+          return `/movie/${categoryOrGenreName}?api_key=${apiKey}&page=1`;
+        }
+
+        if (categoryOrGenreName && typeof categoryOrGenreName === 'number') {
+          return `/discover/movie?api_key=${apiKey}&with_genres=${categoryOrGenreName}&page=1`;
+        }
+
+        return `/movie/popular?api_key=${apiKey}&page=1`;
+      },
     }),
   }),
 });
 
-export const { useGetPopularMoviesQuery } = tmdbApi;
+export const { useGetMoviesQuery } = tmdbApi;

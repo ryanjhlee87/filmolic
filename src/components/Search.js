@@ -3,7 +3,7 @@ import React from 'react';
 // Search input in dropdown menu -> CategoryGenre.js
 const Search = () => {
   return (
-    <form className="form-control py-2">
+    <form className="form-control py-2" onSubmit={e => e.preventDefault()}>
       <div className="input-group input-group-sm">
         <input
           type="text"

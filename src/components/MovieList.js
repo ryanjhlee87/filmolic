@@ -1,8 +1,12 @@
-import { useGetPopularMoviesQuery } from '../services/tmdb';
+import { useSelector } from 'react-redux';
+import { useGetMoviesQuery } from '../services/tmdb';
 import { Movie, Error, Loading } from './';
 
 const MovieList = () => {
-  const { data, error, isLoading } = useGetPopularMoviesQuery();
+  const categoryOrGenreName = useSelector(
+    state => state.tmdb.categoryOrGenreName
+  );
+  const { data, error, isLoading } = useGetMoviesQuery(categoryOrGenreName);
 
   if (error) <Error />;
   if (isLoading) <Loading />;

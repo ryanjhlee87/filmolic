@@ -1,10 +1,13 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Search } from './';
+import { selectCategoryOrGenre } from '../features/tmdb/tmdbSlice';
 
 const CategoryGenre = () => {
   const categories = useSelector(state => state.tmdb.categories);
   const genres = useSelector(state => state.tmdb.genres);
+
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -18,7 +21,10 @@ const CategoryGenre = () => {
 
         {categories &&
           categories.map(category => (
-            <li key={category.id}>
+            <li
+              key={category.id}
+              onClick={() => dispatch(selectCategoryOrGenre(category.value))}
+            >
               <Link to="/">{category.name}</Link>
             </li>
           ))}
@@ -28,7 +34,12 @@ const CategoryGenre = () => {
         {genres &&
           genres.map(genre => (
             <li key={genre.id}>
-              <Link to="/">{genre.name}</Link>
+              <Link
+                to="/"
+                onClick={() => dispatch(selectCategoryOrGenre(genre.id))}
+              >
+                {genre.name}
+              </Link>
             </li>
           ))}
       </ul>
