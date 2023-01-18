@@ -2,7 +2,6 @@ import { BsSunFill, BsMoonFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleTheme } from '../features/theme/themeSlice';
-import { userSelector } from '../features/auth/auth';
 import { themeChange } from 'theme-change';
 import { useEffect } from 'react';
 import CategoryGenre from './CategoryGenre';
@@ -11,7 +10,6 @@ import { LoginLogout } from './';
 
 const Navbar = () => {
   const theme = useSelector(state => state.theme.isDarkmode);
-  const { user } = useSelector(userSelector);
   const dispatch = useDispatch();
 
   useEffect(() => {

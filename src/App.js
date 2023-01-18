@@ -16,11 +16,10 @@ const App = () => {
         <div>
           <Routes>
             <Route exact path="/" element={<MovieList />} />
-            <Route exact apth="/approved/*" element={<MovieList />} />
             <Route exact path="/movie/:id" element={<MovieDeatils />} />
             <Route exact path="/actors/:id" element={<Actors />} />
             <Route exact path="/profile/:id" element={<Profile />} />
-            <Route exact path={'*'} element={<NotFound />} />
+            <Route exact path="/approved" element={<MovieList />} />
           </Routes>
         </div>
       </div>

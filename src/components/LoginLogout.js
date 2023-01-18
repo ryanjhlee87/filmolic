@@ -34,6 +34,11 @@ const LoginLogout = () => {
     loginUser();
   }, [token]);
 
+  const logoutUser = () => {
+    localStorage.clear();
+    window.location.href = '/';
+  };
+
   const { isAuthenticated, user } = useSelector(userSelector);
 
   if (isAuthenticated && user) {
@@ -47,10 +52,12 @@ const LoginLogout = () => {
           className="menu dropdown-content p-2 shadow bg-base-100 rounded-box w-52 mt-4"
         >
           <li>
-            <Link to="/profile/:id">Profile</Link>
+            <Link to={`/profile/${user.id}`}>Profile</Link>
           </li>
-          <li>
-            <Link to="/">Log Out</Link>
+          <li onClick={logoutUser}>
+            <Link to="/" className="text-red-700">
+              Log Out
+            </Link>
           </li>
         </ul>
       </div>
