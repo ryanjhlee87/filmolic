@@ -1,13 +1,17 @@
-import { BsSunFill, BsPersonFill, BsMoonFill } from 'react-icons/bs';
+import { BsSunFill, BsMoonFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleTheme } from '../features/theme/themeSlice';
+import { userSelector } from '../features/auth/auth';
 import { themeChange } from 'theme-change';
 import { useEffect } from 'react';
 import CategoryGenre from './CategoryGenre';
+import { selectCategoryOrGenre } from '../features/tmdb/tmdbSlice';
+import { LoginLogout } from './';
 
 const Navbar = () => {
   const theme = useSelector(state => state.theme.isDarkmode);
+  const { user } = useSelector(userSelector);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -47,6 +51,7 @@ const Navbar = () => {
           to="/"
           className="btn btn-ghost normal-case text-2xl sm:text-2xl lg:text-3xl xl:text-4xl"
           style={{ fontFamily: 'Dancing Script' }}
+          onClick={() => selectCategoryOrGenre('popular')}
         >
           Filmolic
         </Link>
@@ -62,9 +67,7 @@ const Navbar = () => {
         >
           {theme ? <BsSunFill /> : <BsMoonFill />}
         </button>
-        <button className="btn btn-ghost btn-circle">
-          <BsPersonFill />
-        </button>
+        <LoginLogout />
       </div>
     </div>
   );

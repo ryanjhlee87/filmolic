@@ -1,4 +1,11 @@
-import { Navbar, MovieList, NotFound } from './components';
+import {
+  Navbar,
+  MovieList,
+  MovieDeatils,
+  Actors,
+  Profile,
+  NotFound,
+} from './components';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const App = () => {
@@ -9,6 +16,10 @@ const App = () => {
         <div>
           <Routes>
             <Route exact path="/" element={<MovieList />} />
+            <Route exact apth="/approved/*" element={<MovieList />} />
+            <Route exact path="/movie/:id" element={<MovieDeatils />} />
+            <Route exact path="/actors/:id" element={<Actors />} />
+            <Route exact path="/profile/:id" element={<Profile />} />
             <Route exact path={'*'} element={<NotFound />} />
           </Routes>
         </div>
