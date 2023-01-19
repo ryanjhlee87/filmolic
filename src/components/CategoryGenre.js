@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Search } from './';
 import { selectCategoryOrGenre } from '../features/tmdb/tmdbSlice';
 
 const CategoryGenre = () => {
@@ -17,13 +16,8 @@ const CategoryGenre = () => {
     <>
       <ul
         tabIndex={0}
-        className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+        className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 py-4"
       >
-        {/* Search a list of movies by search term */}
-        <Search />
-
-        <hr className="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700" />
-
         {/* Categories */}
         {categories &&
           categories.map(category => (

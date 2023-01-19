@@ -15,7 +15,7 @@ const Search = () => {
   };
 
   return (
-    <form className="form-control py-2" onSubmit={querySubmit}>
+    <form className="form-control py-2 mt-4" onSubmit={querySubmit}>
       <div className="input-group input-group-sm">
         <input
           type="text"

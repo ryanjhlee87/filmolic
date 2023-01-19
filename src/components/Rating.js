@@ -37,7 +37,7 @@ const Rating = ({ rating, vote_average }) => {
         readOnly
       />
       &nbsp; &nbsp;
-      <h2>{vote_average} / 10</h2>
+      <h2>{vote_average.toFixed(1)} / 10</h2>
     </div>
   );
 };

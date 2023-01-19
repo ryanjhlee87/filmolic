@@ -49,7 +49,7 @@ const Navbar = () => {
           to="/"
           className="btn btn-ghost normal-case text-2xl sm:text-2xl lg:text-3xl xl:text-4xl"
           style={{ fontFamily: 'Dancing Script' }}
-          onClick={() => selectCategoryOrGenre('popular')}
+          onClick={() => dispatch(selectCategoryOrGenre('popular'))}
         >
           Filmolic
         </Link>

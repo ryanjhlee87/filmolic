@@ -5,7 +5,7 @@ const Casts = ({ casts }) => {
   const slicedCasts = casts.slice(0, 6);
 
   return (
-    <div className="flex xs:flex-col sm:flex-col md:flex-row justify-around px-2">
+    <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-6">
       {slicedCasts.map(cast => (
         <Cast key={cast.cast_id} cast={cast} />
       ))}

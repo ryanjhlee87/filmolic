@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { userSelector } from '../features/auth/auth';
+import { useGetFavoriteMoviesQuery } from '../services/tmdb';
 
 const Profile = () => {
   // Get access to profile name or id from redux
@@ -7,6 +8,16 @@ const Profile = () => {
 
   const favoriteMovies = [];
   const watchList = [];
+
+  const sessionId = localStorage.getItem('session_id');
+  const accountId = localStorage.getItem('accountId');
+  const { data: favoriteMoviesList } = useGetFavoriteMoviesQuery(
+    sessionId,
+    accountId
+  );
+
+  // Favorite Movies
+  console.log(favoriteMoviesList);
 
   return (
     <div className="flex flex-col w-full">
