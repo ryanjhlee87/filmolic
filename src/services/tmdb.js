@@ -7,6 +7,12 @@ export const tmdbApi = createApi({
   reducerPath: 'tmdbApi',
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: builder => ({
+    getMovie: builder.query({
+      query: id => {
+        return `/movie/${id}?api_key=${apiKey}&append_to_response=videos,credits`;
+      },
+    }),
+
     getMovies: builder.query({
       query: ({ categoryOrGenreName, searchTerm, page }) => {
         if (searchTerm) {
@@ -27,4 +33,4 @@ export const tmdbApi = createApi({
   }),
 });
 
-export const { useGetMoviesQuery } = tmdbApi;
+export const { useGetMoviesQuery, useGetMovieQuery } = tmdbApi;

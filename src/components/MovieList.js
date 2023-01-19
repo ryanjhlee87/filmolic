@@ -19,19 +19,21 @@ const MovieList = () => {
     <>
       {/* Showing category || genre || search results */}
       {searchTerm ? (
-        <h1 className="text-2xl uppercase mt-8">{searchTerm} Movies</h1>
+        <h1 className="xs:text-center sm:text-center md:text-left text-2xl uppercase mt-8">
+          {searchTerm} Movies
+        </h1>
       ) : (
         <>
           {categories.map(category =>
             categoryOrGenreName === category.value ? (
-              <h1 key={category.id} className="text-2xl uppercase mt-8">
+              <h1 key={category.id} className="sm:pl-2 text-2xl uppercase mt-8">
                 {category.name}
               </h1>
             ) : null
           )}
           {genres.map(genre =>
             categoryOrGenreName === genre.id ? (
-              <h1 key={genre.id} className="text-2xl uppercase mt-8">
+              <h1 key={genre.id} className="sm:pl-2 text-2xl uppercase mt-8">
                 {genre.name}
               </h1>
             ) : null
@@ -40,7 +42,7 @@ const MovieList = () => {
       )}
 
       {/* Actual movie list */}
-      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 my-8 w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 my-8 w-full">
         {data &&
           data.results.map(movie => <Movie key={movie.id} movie={movie} />)}
       </div>

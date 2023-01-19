@@ -24,7 +24,7 @@ const Search = () => {
           onChange={e => setQuery(e.target.value)}
           className="input input-bordered w-36 focus:ring-0"
         />
-        <button type="submit" className="btn btn-square">
+        <button type="submit" className="btn btn-square btn-primary">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"

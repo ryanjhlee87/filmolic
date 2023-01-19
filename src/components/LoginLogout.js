@@ -44,8 +44,8 @@ const LoginLogout = () => {
   if (isAuthenticated && user) {
     return (
       <div className="dropdown dropdown-end">
-        <label tabIndex={0} className="btn btn-ghost rounded-btn">
-          {user.username}
+        <label tabIndex={0} className="btn btn-ghost btn-circle">
+          <BsPersonFill className="text-lg text-primary" />
         </label>
         <ul
           tabIndex={0}
@@ -66,7 +66,7 @@ const LoginLogout = () => {
 
   return (
     <button className="btn btn-ghost btn-circle">
-      <BsPersonFill className="text-lg" onClick={fetchToken} />
+      <h2 onClick={fetchToken}>Login</h2>
     </button>
   );
 };
