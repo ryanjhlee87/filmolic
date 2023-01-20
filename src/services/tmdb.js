@@ -40,6 +40,13 @@ export const tmdbApi = createApi({
       },
     }),
 
+    // GET: watchlist
+    getWatchlist: builder.query({
+      query: (sessionId, accountId) => {
+        return `/account/${accountId}/watchlist/movies?api_key=${apiKey}&session_id=${sessionId}&sort_by=created_at.asc&page=1`;
+      },
+    }),
+
     // GET: Actor Details
     getActor: builder.query({
       query: id => {
@@ -68,6 +75,7 @@ export const {
   useGetMovieQuery,
   useGetFavoriteMoviesQuery,
   useAddFavoriteMovieMutation,
+  useGetWatchlistQuery,
   useGetActorQuery,
   useGetMoviesByActorIdQuery,
 } = tmdbApi;

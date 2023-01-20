@@ -15,7 +15,7 @@ const ActorsMovies = ({ movie: { poster_path, title, id } }) => {
             className="rounded-xl lg:w-24 xl:w-36"
           />
         </figure>
-        <p className="mx-auto text-md pt-2 truncate">{title}</p>
+        <p className="mx-auto text-md py-2 block truncate">{title}</p>
       </div>
     </Link>
   );
