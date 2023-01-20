@@ -40,6 +40,18 @@ export const tmdbApi = createApi({
       },
     }),
 
+    // GET: Actor Details
+    getActor: builder.query({
+      query: id => {
+        return `/person/${id}?api_key=${apiKey}&language=en-US`;
+      },
+    }),
+
+    // GET: Movies by Actor ID
+    getMoviesByActorId: builder.query({
+      query: id => `/discover/movie?with_cast=${id}&api_key=${apiKey}`,
+    }),
+
     // POST: favorite movie
     addFavoriteMovie: builder.mutation({
       query: (accountId, body) => ({
@@ -56,4 +68,6 @@ export const {
   useGetMovieQuery,
   useGetFavoriteMoviesQuery,
   useAddFavoriteMovieMutation,
+  useGetActorQuery,
+  useGetMoviesByActorIdQuery,
 } = tmdbApi;

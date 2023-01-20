@@ -1,9 +1,12 @@
 import { Link, useParams } from 'react-router-dom';
 import { useGetMovieQuery } from '../services/tmdb';
-import { Error, Loading, Rating, Casts } from './';
+import { useSelector, useDispatch } from 'react-redux';
+import { userSelector } from '../features/auth/auth';
+import { Error, Loading, Rating, Casts, Trailer } from './';
 
 const MovieDeatils = () => {
   const { id } = useParams();
+  const { user } = useSelector(userSelector);
 
   const { data, error, isFetching } = useGetMovieQuery(id);
 
@@ -34,12 +37,15 @@ const MovieDeatils = () => {
           </div>
 
           {/* Btns */}
-          <div className="grid grid-cols-3 xs:grid-cols-1 gap-1">
+          <div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-1">
             <Link to="/">
               <button className="btn btn-outline w-full">
                 👈 Back to Movies
               </button>
             </Link>
+            <label htmlFor="my-modal-4" className="btn btn-outline btn-success">
+              Watch Video
+            </label>
             <button className="btn btn-outline btn-error">
               ❤️ Add to Favorite
             </button>
@@ -47,6 +53,9 @@ const MovieDeatils = () => {
               👀 Add to Watchlist
             </button>
           </div>
+
+          {/* Trailer Modal / hidden by default */}
+          <Trailer youtubeKey={data.videos.results[0]?.key} />
 
           {/* Overview */}
           <div className="my-8">

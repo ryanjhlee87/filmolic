@@ -10,6 +10,8 @@ export { default as LoginLogout } from './LoginLogout';
 export { default as Rating } from './Rating';
 export { default as Cast } from './Cast';
 export { default as Casts } from './Casts';
+export { default as Trailer } from './Trailer';
+export { default as ActorsMovies } from './ActorsMovies';
 
 export { default as Error } from './Error';
 export { default as Loading } from './Loading';
