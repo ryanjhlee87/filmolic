@@ -1,14 +1,124 @@
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useGetMovieQuery } from '../services/tmdb';
-import { useSelector, useDispatch } from 'react-redux';
+import { useGetListQuery, useGetMovieQuery } from '../services/tmdb';
+import { useSelector } from 'react-redux';
 import { userSelector } from '../features/auth/auth';
 import { Error, Loading, Rating, Casts, Trailer } from './';
+import { fetchToken } from '../utils';
 
 const MovieDeatils = () => {
   const { id } = useParams();
   const { user } = useSelector(userSelector);
 
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [isWatchList, setIsWatchList] = useState(false);
+
+  const { data: favoriteMovies } = useGetListQuery({
+    listName: 'favorite/movies',
+    accountId: user.id,
+    sessionId: localStorage.getItem('session_id'),
+  });
+  const { data: watchlistMovies } = useGetListQuery({
+    listName: 'watchlist/movies',
+    accountId: user.id,
+    sessionId: localStorage.getItem('session_id'),
+  });
+
   const { data, error, isFetching } = useGetMovieQuery(id);
+
+  useEffect(() => {
+    setIsFavorite(
+      !!favoriteMovies?.results?.find(movie => movie?.id === data?.id)
+    );
+  }, [favoriteMovies, data]);
+
+  useEffect(() => {
+    setIsWatchList(
+      !!watchlistMovies?.results?.find(movie => movie?.id === data?.id)
+    );
+  }, [watchlistMovies, data]);
+
+  const addToFavorites = async () => {
+    await axios.post(
+      `https://api.themoviedb.org/3/account/${user.id}/favorite?api_key=${
+        process.env.REACT_APP_TMDB_KEY
+      }&session_id=${localStorage.getItem('session_id')}`,
+      {
+        media_type: 'movie',
+        media_id: id,
+        favorite: !isFavorite,
+      }
+    );
+
+    setIsFavorite(prev => !prev);
+  };
+
+  const addToWatchList = async () => {
+    await axios.post(
+      `https://api.themoviedb.org/3/account/${user.id}/watchlist?api_key=${
+        process.env.REACT_APP_TMDB_KEY
+      }&session_id=${localStorage.getItem('session_id')}`,
+      {
+        media_type: 'movie',
+        media_id: id,
+        watchlist: !isWatchList,
+      }
+    );
+
+    setIsWatchList(prev => !prev);
+  };
+
+  const favoriteBtnsHandler = () => {
+    if (user.id) {
+      if (!isFavorite) {
+        return (
+          <button
+            onClick={addToFavorites}
+            className="btn btn-outline btn-error"
+          >
+            ❤️ Add to Favorite
+          </button>
+        );
+      } else {
+        return (
+          <button onClick={addToFavorites} className="btn btn-error">
+            ❤️ Favorited
+          </button>
+        );
+      }
+    } else {
+      return (
+        <button onClick={fetchToken} className="btn btn-outline btn-error">
+          Login to add favorite
+        </button>
+      );
+    }
+  };
+
+  const watchListBtnsHandler = () => {
+    if (user.id) {
+      if (!isWatchList) {
+        return (
+          <button onClick={addToWatchList} className="btn btn-outline btn-info">
+            👀 Add to Watchlist
+          </button>
+        );
+      } else {
+        return (
+          <button onClick={addToWatchList} className="btn btn-info">
+            👀 Watchlisted
+          </button>
+        );
+      }
+    } else {
+      return (
+        <button onClick={fetchToken} className="btn btn-outline btn-info">
+          👀 Login to Watchlist
+        </button>
+      );
+    }
+  };
 
   if (error) return <Error />;
   if (isFetching) return <Loading />;
@@ -56,12 +166,8 @@ const MovieDeatils = () => {
               >
                 Watch Video
               </label>
-              <button className="btn btn-outline btn-error">
-                ❤️ Add to Favorite
-              </button>
-              <button className="btn btn-outline btn-info">
-                👀 Add to Watchlist
-              </button>
+              {favoriteBtnsHandler()}
+              {watchListBtnsHandler()}
             </div>
 
             {/* Trailer Modal / hidden by default */}

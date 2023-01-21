@@ -3,7 +3,8 @@ import {
   MovieList,
   MovieDeatils,
   Actors,
-  Profile,
+  Favorites,
+  WatchLists,
   NotFound,
 } from './components';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -18,8 +19,18 @@ const App = () => {
             <Route exact path="/" element={<MovieList />} />
             <Route exact path="/movie/:id" element={<MovieDeatils />} />
             <Route exact path="/actors/:id" element={<Actors />} />
-            <Route exact path="/profile/:id" element={<Profile />} />
+            <Route
+              exact
+              path="/profile/:id/favorites"
+              element={<Favorites />}
+            />
+            <Route
+              exact
+              path="/profile/:id/watchlists"
+              element={<WatchLists />}
+            />
             <Route exact path="/approved" element={<MovieList />} />
+            <Route path={'*'} element={<NotFound />} />
           </Routes>
         </div>
       </div>

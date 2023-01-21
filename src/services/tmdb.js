@@ -59,6 +59,12 @@ export const tmdbApi = createApi({
       query: id => `/discover/movie?with_cast=${id}&api_key=${apiKey}`,
     }),
 
+    // Get User Specific Lists
+    getList: builder.query({
+      query: ({ listName, accountId, sessionId }) =>
+        `/account/${accountId}/${listName}?api_key=${apiKey}&session_id=${sessionId}&page=1`,
+    }),
+
     // POST: favorite movie
     addFavoriteMovie: builder.mutation({
       query: (accountId, body) => ({
@@ -78,4 +84,5 @@ export const {
   useGetWatchlistQuery,
   useGetActorQuery,
   useGetMoviesByActorIdQuery,
+  useGetListQuery,
 } = tmdbApi;
